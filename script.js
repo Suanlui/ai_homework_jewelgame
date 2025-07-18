@@ -14,6 +14,10 @@ class CandyCrushGame {
         this.rainbowCandiesCollected = 0;
         this.rainbowBonusTarget = 0;
         
+        // Mobile touch tracking
+        this.touchStart = null;
+        this.swipeTarget = null;
+        
         // Candy types
         this.candyTypes = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
         
@@ -227,11 +231,16 @@ class CandyCrushGame {
                 candyElement.dataset.col = col;
                 candyElement.innerHTML = '<span></span>';
                 
-                // Add event listeners
+                // Add event listeners for both mouse and touch
                 candyElement.addEventListener('click', (e) => this.handleCandyClick(e, row, col));
                 candyElement.addEventListener('mousedown', (e) => this.handleMouseDown(e, row, col));
                 candyElement.addEventListener('mouseup', (e) => this.handleMouseUp(e, row, col));
                 candyElement.addEventListener('mouseover', (e) => this.handleMouseOver(e, row, col));
+                
+                // Touch events for mobile
+                candyElement.addEventListener('touchstart', (e) => this.handleTouchStart(e, row, col));
+                candyElement.addEventListener('touchend', (e) => this.handleTouchEnd(e, row, col));
+                candyElement.addEventListener('touchmove', (e) => this.handleTouchMove(e, row, col));
                 
                 gameBoard.appendChild(candyElement);
             }
@@ -280,6 +289,79 @@ class CandyCrushGame {
         if (this.dragStart && (this.dragStart.row !== row || this.dragStart.col !== col)) {
             // Visual feedback for drag and drop
         }
+    }
+    
+    // Touch event handlers for mobile
+    handleTouchStart(e, row, col) {
+        e.preventDefault(); // Prevent default touch behavior
+        if (!this.gameRunning || this.isProcessing) return;
+        
+        this.touchStart = { 
+            row, 
+            col, 
+            x: e.touches[0].clientX, 
+            y: e.touches[0].clientY,
+            time: Date.now()
+        };
+        e.target.classList.add('dragging');
+    }
+    
+    handleTouchMove(e, _row, _col) {
+        e.preventDefault();
+        if (!this.touchStart) return;
+        
+        const touch = e.touches[0];
+        const deltaX = touch.clientX - this.touchStart.x;
+        const deltaY = touch.clientY - this.touchStart.y;
+        const minSwipeDistance = 30;
+        
+        // Determine swipe direction if moved enough
+        if (Math.abs(deltaX) > minSwipeDistance || Math.abs(deltaY) > minSwipeDistance) {
+            let targetRow = this.touchStart.row;
+            let targetCol = this.touchStart.col;
+            
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                // Horizontal swipe
+                if (deltaX > 0 && targetCol < this.boardSize - 1) {
+                    targetCol++;
+                } else if (deltaX < 0 && targetCol > 0) {
+                    targetCol--;
+                }
+            } else {
+                // Vertical swipe
+                if (deltaY > 0 && targetRow < this.boardSize - 1) {
+                    targetRow++;
+                } else if (deltaY < 0 && targetRow > 0) {
+                    targetRow--;
+                }
+            }
+            
+            // Store the target for touchend
+            this.swipeTarget = { row: targetRow, col: targetCol };
+        }
+    }
+    
+    handleTouchEnd(e, _row, _col) {
+        e.preventDefault();
+        if (!this.touchStart) return;
+        
+        const draggedElement = document.querySelector('.dragging');
+        if (draggedElement) draggedElement.classList.remove('dragging');
+        
+        const touchDuration = Date.now() - this.touchStart.time;
+        
+        // If it's a quick tap (less than 300ms) and no swipe, treat as click
+        if (touchDuration < 300 && !this.swipeTarget) {
+            this.handleCandyClick(e, this.touchStart.row, this.touchStart.col);
+        } else if (this.swipeTarget) {
+            // Handle swipe gesture
+            if (this.isAdjacent(this.touchStart.row, this.touchStart.col, this.swipeTarget.row, this.swipeTarget.col)) {
+                this.swapCandies(this.touchStart.row, this.touchStart.col, this.swipeTarget.row, this.swipeTarget.col);
+            }
+        }
+        
+        this.touchStart = null;
+        this.swipeTarget = null;
     }
     
     selectCandy(row, col) {

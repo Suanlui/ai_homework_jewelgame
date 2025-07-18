@@ -471,25 +471,288 @@ body {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+
+/* Extra Small Devices (phones in portrait) */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+        padding: 0;
+    }
+    
+    /* Rules Page Mobile */
+    .rules-page {
+        padding: 10px;
+        min-height: 100vh;
+    }
+    
+    .rules-container {
+        padding: 15px;
+        margin: 0;
+        border-radius: 15px;
+        max-width: 100%;
+    }
+    
+    .rules-container h1 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+    
+    .rules-content h2 {
+        font-size: 1.4em;
+        margin-bottom: 15px;
+    }
+    
+    .rule-item {
+        padding: 12px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+    
+    .rule-icon {
+        font-size: 1.5em;
+        min-width: auto;
+    }
+    
+    .rule-item p {
+        font-size: 0.9em;
+        text-align: center;
+        line-height: 1.3;
+    }
+    
+    .start-button {
+        padding: 15px 25px;
+        font-size: 1.2em;
+        margin-top: 20px;
+        border-radius: 20px;
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    /* Game Page Mobile */
+    .game-page {
+        padding: 10px;
+    }
+    
+    .game-container {
+        max-width: 100%;
+        margin: 0;
+    }
+    
+    .game-header {
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 15px;
+    }
+    
+    .game-header h1 {
+        font-size: 1.6em;
+        margin-bottom: 10px;
+    }
+    
+    .game-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+    
+    .stat-item {
+        padding: 8px;
+        border-radius: 8px;
+    }
+    
+    .stat-label {
+        font-size: 0.8em;
+        margin-bottom: 2px;
+    }
+    
+    .stat-value {
+        font-size: 1em;
+    }
+    
+    /* Mobile Game Board */
     .game-board {
-        grid-template-columns: repeat(8, 45px);
-        grid-template-rows: repeat(8, 45px);
+        grid-template-columns: repeat(8, 35px);
+        grid-template-rows: repeat(8, 35px);
+        gap: 2px;
+        padding: 10px;
+        border-radius: 15px;
+    }
+    
+    .candy {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+        border-width: 2px;
+        cursor: pointer;
+        /* Better touch targets */
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    .candy:hover {
+        transform: scale(1.05);
+    }
+    
+    .candy:active {
+        transform: scale(0.95);
+    }
+    
+    /* Combo Display Mobile */
+    .combo-display {
+        font-size: 1.2em;
+        padding: 10px;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+    
+    /* Modal Mobile */
+    .modal-content {
+        padding: 25px;
+        border-radius: 20px;
+        max-width: 90%;
+        width: 300px;
+    }
+    
+    .modal-content h2 {
+        font-size: 1.6em;
+        margin-bottom: 15px;
+    }
+    
+    .modal-content p {
+        font-size: 1.1em;
+        margin: 8px 0;
+    }
+    
+    .modal-button {
+        padding: 12px 20px;
+        font-size: 1em;
+        border-radius: 15px;
+        margin-top: 15px;
+        min-width: 120px;
+    }
+}
+
+/* Small Devices (phones in landscape, small tablets) */
+@media (min-width: 481px) and (max-width: 768px) {
+    .rules-container {
+        padding: 25px;
+        max-width: 500px;
+    }
+    
+    .rules-container h1 {
+        font-size: 2.2em;
+    }
+    
+    .game-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    
+    .game-board {
+        grid-template-columns: repeat(8, 42px);
+        grid-template-rows: repeat(8, 42px);
         gap: 3px;
         padding: 15px;
     }
     
     .candy {
-        width: 45px;
-        height: 45px;
+        width: 42px;
+        height: 42px;
         font-size: 16px;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
     }
     
-    .rules-container {
-        padding: 20px;
+    .modal-content {
+        max-width: 400px;
+        padding: 30px;
+    }
+}
+
+/* Medium Devices (tablets) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .game-container {
+        max-width: 700px;
     }
     
     .game-stats {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    .game-board {
+        grid-template-columns: repeat(8, 55px);
+        grid-template-rows: repeat(8, 55px);
+        gap: 4px;
+        padding: 18px;
+    }
+    
+    .candy {
+        width: 55px;
+        height: 55px;
+        font-size: 18px;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+    .rules-page {
+        padding: 5px;
+    }
+    
+    .rules-container {
+        padding: 15px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .rules-container h1 {
+        font-size: 1.6em;
+        margin-bottom: 15px;
+    }
+    
+    .rule-item {
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+    
+    .game-page {
+        padding: 5px;
+    }
+    
+    .game-header {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .game-header h1 {
+        font-size: 1.4em;
+        margin-bottom: 8px;
+    }
+    
+    .game-board {
+        grid-template-columns: repeat(8, 30px);
+        grid-template-rows: repeat(8, 30px);
+        gap: 2px;
+        padding: 8px;
+    }
+    
+    .candy {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .candy {
+        border-width: 1px;
+    }
+    
+    .candy::before, .candy::after {
+        border-radius: inherit;
     }
 }
