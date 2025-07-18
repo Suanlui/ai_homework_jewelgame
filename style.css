@@ -1,0 +1,495 @@
+/* Candy Crush Style Game CSS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comic Sans MS', cursive, Arial, sans-serif;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 25%, #fecfef 50%, #fdcbf1 75%, #e8cff7 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Rules Page */
+.rules-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.rules-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border: 3px solid rgba(255, 255, 255, 0.8);
+}
+
+.rules-container h1 {
+    font-size: 2.5em;
+    color: #e74c3c;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.rules-content h2 {
+    font-size: 1.8em;
+    color: #2c3e50;
+    margin-bottom: 25px;
+}
+
+.rule-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(52, 152, 219, 0.1);
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    border: 2px solid rgba(52, 152, 219, 0.3);
+}
+
+.rule-icon {
+    font-size: 2em;
+    min-width: 50px;
+    text-align: center;
+}
+
+.rule-item p {
+    text-align: left;
+    font-size: 1.1em;
+    color: #2c3e50;
+    line-height: 1.4;
+}
+
+.start-button {
+    background: linear-gradient(45deg, #e74c3c, #f39c12);
+    color: white;
+    border: none;
+    padding: 20px 40px;
+    font-size: 1.5em;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 30px;
+    box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+    transition: all 0.3s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.start-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(231, 76, 60, 0.6);
+}
+
+/* Game Page */
+.game-page {
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.game-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.game-header {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.game-header h1 {
+    font-size: 2.2em;
+    color: #e74c3c;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.game-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.stat-item {
+    background: rgba(52, 152, 219, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid rgba(52, 152, 219, 0.3);
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9em;
+    color: #7f8c8d;
+    margin-bottom: 3px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.progress-container {
+    margin-top: 15px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(149, 165, 166, 0.3);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #e74c3c, #f39c12);
+    width: 0%;
+    transition: width 0.5s ease;
+    border-radius: 6px;
+}
+
+/* Game Board */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(8, 60px);
+    grid-template-rows: repeat(8, 60px);
+    gap: 4px;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 20px;
+    margin: 0 auto;
+    width: fit-content;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Candies */
+.candy {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    user-select: none;
+    position: relative;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.candy::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    right: 3px;
+    bottom: 3px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, 
+        rgba(255,255,255,0.6) 0%, 
+        rgba(255,255,255,0.2) 50%, 
+        transparent 100%);
+    z-index: 1;
+}
+
+.candy::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    width: 20px;
+    height: 15px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 30% 30%, 
+        rgba(255,255,255,0.8) 0%, 
+        rgba(255,255,255,0.4) 50%, 
+        transparent 100%);
+    z-index: 2;
+}
+
+.candy span {
+    z-index: 3;
+    position: relative;
+}
+
+.candy:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.candy.selected {
+    border-color: #f1c40f;
+    box-shadow: 0 0 20px #f1c40f;
+    animation: candyPulse 0.6s infinite alternate;
+}
+
+.candy.dragging {
+    transform: scale(1.2);
+    z-index: 10;
+    opacity: 0.8;
+}
+
+/* Candy Colors */
+.candy.red {
+    background: radial-gradient(circle at 25% 25%, 
+        #ff6b6b 0%, 
+        #e74c3c 50%, 
+        #c0392b 100%);
+}
+
+.candy.blue {
+    background: radial-gradient(circle at 25% 25%, 
+        #74b9ff 0%, 
+        #3498db 50%, 
+        #2980b9 100%);
+}
+
+.candy.green {
+    background: radial-gradient(circle at 25% 25%, 
+        #55efc4 0%, 
+        #2ecc71 50%, 
+        #27ae60 100%);
+}
+
+.candy.yellow {
+    background: radial-gradient(circle at 25% 25%, 
+        #fdcb6e 0%, 
+        #f39c12 50%, 
+        #e67e22 100%);
+}
+
+.candy.purple {
+    background: radial-gradient(circle at 25% 25%, 
+        #a29bfe 0%, 
+        #9b59b6 50%, 
+        #8e44ad 100%);
+}
+
+.candy.orange {
+    background: radial-gradient(circle at 25% 25%, 
+        #fd79a8 0%, 
+        #e84393 50%, 
+        #d63031 100%);
+}
+
+/* Special Candies */
+.candy.striped {
+    background: repeating-linear-gradient(
+        45deg,
+        currentColor,
+        currentColor 5px,
+        rgba(255,255,255,0.3) 5px,
+        rgba(255,255,255,0.3) 10px
+    );
+    animation: stripedSpin 2s linear infinite;
+}
+
+.candy.wrapped {
+    border: 4px solid #f1c40f;
+    animation: wrappedPulse 1s infinite alternate;
+}
+
+.candy.bomb {
+    background: radial-gradient(circle at 25% 25%, #2c3e50, #34495e, #2c3e50);
+    border-color: #f39c12;
+    animation: bombTick 1s infinite;
+}
+
+.candy.rainbow {
+    background: conic-gradient(from 0deg, 
+        #ff6b6b, #fdcb6e, #55efc4, #74b9ff, #a29bfe, #fd79a8, #ff6b6b);
+    border-color: #fff;
+    animation: rainbowSpin 2s linear infinite;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+/* Animations */
+@keyframes candyPulse {
+    0% { box-shadow: 0 0 20px #f1c40f; }
+    100% { box-shadow: 0 0 30px #f1c40f, 0 0 40px #f1c40f; }
+}
+
+@keyframes stripedSpin {
+    0% { background-position: 0 0; }
+    100% { background-position: 20px 20px; }
+}
+
+@keyframes wrappedPulse {
+    0% { border-width: 4px; }
+    100% { border-width: 6px; }
+}
+
+@keyframes bombTick {
+    0%, 50% { transform: scale(1); }
+    25%, 75% { transform: scale(1.05); }
+}
+
+@keyframes rainbowSpin {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+.candy.matched {
+    animation: candyExplode 0.4s ease-out forwards;
+}
+
+@keyframes candyExplode {
+    0% { 
+        transform: scale(1); 
+        opacity: 1; 
+    }
+    50% { 
+        transform: scale(1.3); 
+        opacity: 0.7; 
+    }
+    100% { 
+        transform: scale(0); 
+        opacity: 0; 
+    }
+}
+
+.candy.falling {
+    animation: candyFall 0.5s ease-out;
+}
+
+@keyframes candyFall {
+    0% { 
+        transform: translateY(-80px); 
+        opacity: 0; 
+    }
+    100% { 
+        transform: translateY(0); 
+        opacity: 1; 
+    }
+}
+
+/* Combo Display */
+.combo-display {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #f39c12;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: comboGlow 0.5s infinite alternate;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 15px;
+    border: 3px solid #f39c12;
+}
+
+@keyframes comboGlow {
+    0% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); }
+    100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px #f39c12; }
+}
+
+/* Modals */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #e74c3c, #f39c12);
+    border-radius: 25px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    color: white;
+    max-width: 400px;
+    width: 90%;
+}
+
+.modal-content.success {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.modal-content.victory {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+}
+
+.modal-content h2 {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content p {
+    font-size: 1.3em;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.modal-button {
+    background: rgba(255, 255, 255, 0.9);
+    color: #2c3e50;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-board {
+        grid-template-columns: repeat(8, 45px);
+        grid-template-rows: repeat(8, 45px);
+        gap: 3px;
+        padding: 15px;
+    }
+    
+    .candy {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+    }
+    
+    .rules-container {
+        padding: 20px;
+    }
+    
+    .game-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

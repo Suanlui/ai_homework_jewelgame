@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candy Crush Style Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Rules Page -->
+    <div id="rulesPage" class="rules-page">
+        <div class="rules-container">
+            <h1>💎 Jewel Shuffle Game 💎</h1>
+            
+            <div class="rules-content">
+                <h2>How to Play</h2>
+                
+                <div class="rule-item">
+                    <span class="rule-icon">🎯</span>
+                    <p><strong>Objective:</strong> Match 3 or more jewels of the same color to clear them from the board</p>
+                </div>
+                
+                <div class="rule-item">
+                    <span class="rule-icon">🔄</span>
+                    <p><strong>How to Play:</strong> Click and drag to swap adjacent jewels and create matches</p>
+                </div>
+                
+                <div class="rule-item">
+                    <span class="rule-icon">💥</span>
+                    <p><strong>Special Jewels:</strong> Match 4+ jewels = rainbow candy</p>
+                </div>
+                
+                <div class="rule-item">
+                    <span class="rule-icon">🌈</span>
+                    <p><strong>Rainbow Bonus:</strong> Rainbow jewels match with ANY color and give 1.5x score multiplier + 50 bonus points. Required to advance levels!</p>
+                </div>
+                
+                <div class="rule-item">
+                    <span class="rule-icon">⏰</span>
+                    <p><strong>Time Limit:</strong> You have 60 seconds to reach the target score each level</p>
+                </div>
+                
+                <div class="rule-item">
+                    <span class="rule-icon">🏆</span>
+                    <p><strong>Level Goal:</strong> Reach target score AND collect required rainbow candies (Level 1: 1 rainbow, Level 2: 2 rainbows, etc.)</p>
+                </div>
+                
+                <div class="rule-item">
+                    <span class="rule-icon">🎵</span>
+                    <p><strong>Complete:</strong> Finish all 28 levels to become a Jewel Master!</p>
+                </div>
+            </div>
+            
+            <button id="startButton" class="start-button">🎮 Start Playing! 🎮</button>
+        </div>
+    </div>
+
+    <!-- Game Page -->
+    <div id="gamePage" class="game-page" style="display: none;">
+        <div class="game-container">
+            <!-- Game Header -->
+            <div class="game-header">
+                <h1>💎 Jewel Shuffle 💎</h1>
+                <div class="game-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Level:</span>
+                        <span id="levelDisplay" class="stat-value">1/28</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Score:</span>
+                        <span id="scoreDisplay" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Target:</span>
+                        <span id="targetDisplay" class="stat-value">600</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Time:</span>
+                        <span id="timerDisplay" class="stat-value">60s</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">🌈 Rainbows:</span>
+                        <span id="rainbowDisplay" class="stat-value">0/1</span>
+                    </div>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Board -->
+            <div id="gameBoard" class="game-board"></div>
+            
+            <!-- Combo Display -->
+            <div id="comboDisplay" class="combo-display" style="display: none;">
+                <span>🔥 COMBO x<span id="comboCount">0</span>! 🔥</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2 id="gameOverTitle">⏰ Time's Up!</h2>
+            <p>Level: <span id="finalLevel">1</span></p>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <button id="restartButton" class="modal-button">🔄 Try Again</button>
+        </div>
+    </div>
+
+    <!-- Level Complete Modal -->
+    <div id="levelCompleteModal" class="modal" style="display: none;">
+        <div class="modal-content success">
+            <h2>🎉 Level Complete!</h2>
+            <p>Score: <span id="levelScore">0</span></p>
+            <p>Bonus Time: <span id="timeBonus">0</span> points</p>
+            <button id="nextLevelButton" class="modal-button">➡️ Next Level</button>
+        </div>
+    </div>
+
+    <!-- Victory Modal -->
+    <div id="victoryModal" class="modal" style="display: none;">
+        <div class="modal-content victory">
+            <h2>🏆 Congratulations! 🏆</h2>
+            <p>You've completed all 28 levels!</p>
+            <p>Final Score: <span id="victoryScore">0</span></p>
+            <button id="playAgainButton" class="modal-button">🎮 Play Again</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
